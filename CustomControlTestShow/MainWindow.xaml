@@ -1,0 +1,117 @@
+﻿<Window x:Class="CustomControlTestShow.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CustomControlTestShow"
+        xmlns:ctr="clr-namespace:CustomControls;assembly=CustomControls"
+        xmlns:conv="clr-namespace:CustomControlTestShow.Converters"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="1000">
+    <Grid Margin="0,0,10,-6">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Vertical">
+                    <RadioButton GroupName="DisplayType" Margin="10" VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding Path=IsOnlyImageVisible}">Show only image</RadioButton>
+                    <RadioButton GroupName="DisplayType" Margin="10" VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding Path=IsOnlyCreatedCircuitVisible}">Show only created circuit</RadioButton>
+                    <RadioButton GroupName="DisplayType" Margin="10" VerticalAlignment="Center" VerticalContentAlignment="Center" IsChecked="{Binding Path=IsImageOverlaidWithCreatedCircuit}">Show image overlaid with created circuit</RadioButton>
+                </StackPanel>
+            </Grid>
+
+            <Viewbox Grid.Row="1" x:Name="ViewBox_Circuit" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50">
+
+                <Canvas Height="600" Width="900" Background="White">
+
+                    <Image Source="C:\Users\Mechlab\source\repos\CustomControlsProofOfConcept\CustomControlTestShow\Images\Circuit_01.png" Visibility="{Binding IsOnlyCreatedCircuitVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Canvas.Left="-0" Canvas.Top="-1" Height="600" Width="900"/>
+
+                    <ctr:HAWE_Freigabe Canvas.Left="42" Canvas.Top="85" Label="ND1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+                    <ctr:HAWE_Freigabe Canvas.Left="102" Canvas.Top="85" Label="HD1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+                    <ctr:HAWE_Freigabe Canvas.Left="254" Canvas.Top="86" Label="ND2" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+                    <ctr:HAWE_Freigabe Canvas.Left="320" Canvas.Top="86" Label="HD2" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+                    <ctr:HAWE_Freigabe Canvas.Left="473" Canvas.Top="87" Label="ND3" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+                    <ctr:HAWE_Freigabe Canvas.Left="529" Canvas.Top="88" Label="HD3" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+                    <ctr:HAWE_Freigabe Canvas.Left="689" Canvas.Top="88" Label="ND4" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+                    <ctr:HAWE_Freigabe Canvas.Left="747" Canvas.Top="88" Label="HD4" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="102" Width="35" IsOpen="{Binding IsFlowDirectionInverted}"/>
+
+
+                    <ctr:HAWE_PumpSmall Canvas.Left="35" Canvas.Top="202" Label="PS-1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="23" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    <ctr:HAWE_PumpSmall Canvas.Left="114" Canvas.Top="202" Label="PS-1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="23" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    <ctr:HAWE_PumpSmall Canvas.Left="250" Canvas.Top="202" Label="PS-2" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="23" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    <ctr:HAWE_PumpSmall Canvas.Left="330" Canvas.Top="203" Label="PS-3" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="23" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    <ctr:HAWE_PumpSmall Canvas.Left="466" Canvas.Top="204" Label="PS-4" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="23" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    <ctr:HAWE_PumpSmall Canvas.Left="544" Canvas.Top="204" Label="PS-5" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="24" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    <ctr:HAWE_PumpSmall Canvas.Left="681" Canvas.Top="205" Label="PS-6" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="23" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    <ctr:HAWE_PumpSmall Canvas.Left="760" Canvas.Top="205" Label="PS-7" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="74" Width="23" SwitchFlowDirection="{Binding IsFlowDirectionInverted, Mode=TwoWay}"/>
+                    
+                    
+                    <ctr:HAWE_PumpBig Canvas.Left="262" Canvas.Top="478" Label="PB-1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="72" Width="78"/>
+                    
+                    
+                    <ctr:HAWE_Pressure Canvas.Left="19" Canvas.Top="254" Label="D_ND1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="53" Width="52"/>
+                    <ctr:HAWE_Pressure Canvas.Left="141" Canvas.Top="211" Label="D_HD1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="53" Width="48"/>
+                    <ctr:HAWE_Pressure Canvas.Left="236" Canvas.Top="261" Label="D_ND2" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="41" Width="46"/>
+                    <ctr:HAWE_Pressure Canvas.Left="356" Canvas.Top="216" Label="D_HD2" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="45" Width="52"/>
+                    <ctr:HAWE_Pressure Canvas.Left="308" Canvas.Top="374" Label="D_R" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="40" Width="51"/>
+                    <ctr:HAWE_Pressure Canvas.Left="211" Canvas.Top="42" Label="D_X1" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="41" Width="50"/>
+                    <ctr:HAWE_Pressure Canvas.Left="413" Canvas.Top="42" Label="D_X2" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="40" Width="65"/>
+                    <ctr:HAWE_Pressure Canvas.Left="635" Canvas.Top="42" Label="D_X3" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="40" Width="50"/>
+                    <ctr:HAWE_Pressure Canvas.Left="846" Canvas.Top="42" Label="D_X4" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="39" Width="51"/>
+                    <ctr:HAWE_Pressure Canvas.Left="663" Canvas.Top="261" Label="D_ND4" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="41" Width="65"/>
+                    <ctr:HAWE_Pressure Canvas.Left="774" Canvas.Top="220" Label="D_HD4" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="39" Width="73"/>
+                    <ctr:HAWE_Pressure Canvas.Left="563" Canvas.Top="220" Label="D_HD3" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="39" Width="67"/>
+                    <ctr:HAWE_Pressure Canvas.Left="443" Canvas.Top="261" Label="D_ND3" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Height="39" Width="68"/>
+
+
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="83" Canvas.Top="210" Width="3" Height="161" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="228" Canvas.Top="98" Width="3" Height="251" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="300" Canvas.Top="211" Width="2" Height="289" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="443" Canvas.Top="97" Width="2" Height="338" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="516" Canvas.Top="211" Width="2" Height="160" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="657" Canvas.Top="94" Width="2" Height="253" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="731" Canvas.Top="213" Width="2" Height="158" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="873" Canvas.Top="97" Width="2" Height="253" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="771" Canvas.Top="174" Width="2" Height="66" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="752" Canvas.Top="174" Width="2" Height="40" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="711" Canvas.Top="174" Width="2" Height="39" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="692" Canvas.Top="174" Width="2" Height="66" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="555" Canvas.Top="174" Width="2" Height="63" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="536" Canvas.Top="174" Width="2" Height="37" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="496" Canvas.Top="173" Width="2" Height="39" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="477" Canvas.Top="173" Width="2" Height="65" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="340" Canvas.Top="172" Width="2" Height="68" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="321" Canvas.Top="172" Width="2" Height="39" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="280" Canvas.Top="172" Width="2" Height="36" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="261" Canvas.Top="172" Width="2" Height="66" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="124" Canvas.Top="171" Width="2" Height="64" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="106" Canvas.Top="171" Width="2" Height="38" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="64" Canvas.Top="171" Width="2" Height="40" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitVerticalLine  Canvas.Left="46" Canvas.Top="171" Width="2" Height="64" IsFlowDownToUp="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    
+                    
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Left="64" Canvas.Top="208" Width="43" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Top="368" Width="650" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Canvas.Left="83"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Top="349" Width="647" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Canvas.Left="228"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Top="279" Width="147" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Canvas.Left="83"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Top="280" Width="145" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Canvas.Left="300"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Top="280" Width="143" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Canvas.Left="516"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Top="282" Width="144" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}" Canvas.Left="731"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Left="280" Canvas.Top="209" Width="43" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Left="496" Canvas.Top="211" Width="41" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+                    <ctr:HAWE_CircuitHorizontalLine Height="3" Canvas.Left="711" Canvas.Top="212" Width="43" IsFlowLeftToRight="{Binding IsFlowDirectionInverted}" Visibility="{Binding IsOnlyImageVisible, Converter={x:Static conv:BooleanToVisibilityConverter.FalseOrNullToVisible}}"/>
+
+
+                </Canvas>
+            </Viewbox>
+
+        </Grid>
+
+
+
+    </Grid>
+</Window>

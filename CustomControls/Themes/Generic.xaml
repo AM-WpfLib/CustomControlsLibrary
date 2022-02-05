@@ -1,0 +1,431 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CustomControls">
+
+    <!--HAWE_CircuitHorizontalLine-->
+    <Style TargetType="{x:Type local:HAWE_CircuitHorizontalLine}">
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FlowColor" Value="SteelBlue"/>
+        <Setter Property="IsFlowLeftToRight" Value="{x:Null}"/>
+        <Setter Property="Height" Value="6"/>
+        <Setter Property="Width" Value="200"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_CircuitHorizontalLine}">
+
+                        <Border x:Name="PART_Indicator" Grid.Column="0" Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                            <Grid x:Name="Animation" ClipToBounds="True">
+                                
+                            <Rectangle Name="RectangleLeftToRight" Width="{TemplateBinding Width}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Fill="{TemplateBinding FlowColor}">
+                                <Rectangle.Triggers>
+                                    
+                                    <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="RectangleLeftToRight"
+                                                    Storyboard.TargetProperty="Width"
+                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_Indicator}" Duration="0:0:5"
+                                                    RepeatBehavior="Forever" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    
+                                </Rectangle.Triggers>
+                            </Rectangle>
+
+                            <Rectangle Name="RectangleRightToLeft" Width="{TemplateBinding Width}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="{TemplateBinding FlowColor}">
+                                <Rectangle.Triggers>
+
+                                    <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="RectangleRightToLeft"
+                                                    Storyboard.TargetProperty="Width"
+                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_Indicator}" Duration="0:0:5"
+                                                    RepeatBehavior="Forever" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+
+                                </Rectangle.Triggers>
+                            </Rectangle>
+
+                        </Grid>
+
+                        </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFlowLeftToRight" Value="True">
+                            <Setter TargetName="RectangleLeftToRight" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RectangleRightToLeft" Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="FlowColor" Value="Orange"/>
+                        </Trigger>
+                        <Trigger Property="IsFlowLeftToRight" Value="False">
+                            <Setter TargetName="RectangleLeftToRight" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="RectangleRightToLeft" Property="Visibility" Value="Visible"/>
+                            <Setter Property="FlowColor" Value="Yellow"/>
+                        </Trigger>
+                        <Trigger Property="IsFlowLeftToRight" Value="{x:Null}">
+                            <Setter TargetName="RectangleLeftToRight" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="RectangleRightToLeft" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--HAWE_CircuitVerticalLine-->
+    <Style TargetType="{x:Type local:HAWE_CircuitVerticalLine}">
+        <Setter Property="Background" Value="Black"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FlowColor" Value="SteelBlue"/>
+        <Setter Property="IsFlowDownToUp" Value="{x:Null}"/>
+        <Setter Property="Height" Value="200"/>
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_CircuitVerticalLine}">
+
+                    <Border x:Name="PART_Indicator" Grid.Column="0" Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid x:Name="Animation" ClipToBounds="True">
+
+                            <Rectangle Name="RectangleDownToUp" Height="{TemplateBinding Height}" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Fill="{TemplateBinding FlowColor}">
+                                <Rectangle.Triggers>
+
+                                    <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="RectangleDownToUp"
+                                                    Storyboard.TargetProperty="Height"
+                                                    From="0.0" To="{Binding Path=Height, ElementName=PART_Indicator}" Duration="0:0:5"
+                                                    RepeatBehavior="Forever" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+
+                                </Rectangle.Triggers>
+                            </Rectangle>
+
+                            <Rectangle Name="RectangleUpToDown" Height="{TemplateBinding Height}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Fill="{TemplateBinding FlowColor}">
+                                <Rectangle.Triggers>
+
+                                    <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation
+                                                    Storyboard.TargetName="RectangleUpToDown"
+                                                    Storyboard.TargetProperty="Height"
+                                                    From="0" To="{Binding Path=Height, ElementName=PART_Indicator}" Duration="0:0:5"
+                                                    RepeatBehavior="Forever" />
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+
+                                </Rectangle.Triggers>
+                            </Rectangle>
+
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFlowDownToUp" Value="True">
+                            <Setter TargetName="RectangleDownToUp" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="RectangleUpToDown" Property="Visibility" Value="Collapsed"/>
+                            <Setter Property="FlowColor" Value="Orange"/>
+                        </Trigger>
+                        <Trigger Property="IsFlowDownToUp" Value="False">
+                            <Setter TargetName="RectangleDownToUp" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="RectangleUpToDown" Property="Visibility" Value="Visible"/>
+                            <Setter Property="FlowColor" Value="Yellow"/>
+                        </Trigger>
+                        <Trigger Property="IsFlowDownToUp" Value="{x:Null}">
+                            <Setter TargetName="RectangleDownToUp" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="RectangleUpToDown" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--HAWE_Freigabe-->
+    <!--Needed Info: Width = 140
+                     Height = 200
+                     Translate X = 0
+                     Translate Y = 0-->
+    <Style TargetType="{x:Type local:HAWE_Freigabe}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_Freigabe}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{TemplateBinding Label}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center"/>
+
+                            <Viewbox x:Name="Viewbox" Grid.Row="1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                <UserControl x:Name="UC_Icon">
+
+                                    <Canvas x:Name="OuterCanvas" Width="140" Height="200">
+                                        <Canvas.RenderTransform>
+                                            <TransformGroup>
+                                                <TranslateTransform X="0" Y="0" />
+                                                <RotateTransform Angle="{Binding Angle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:HAWE_Freigabe}}}" CenterX="70" CenterY="100"/>
+                                            </TransformGroup>
+                                        </Canvas.RenderTransform>
+                                        <Canvas.Resources/>
+                                        
+                                        <Canvas x:Name="InnerCanvas">
+
+                                            <Path x:Name="Path" Fill="{Binding ElementName=UC_Icon, Path=Foreground}" StrokeThickness="5.23185" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M 0 0 V 36.56776 H 1.9166666 V 1.7642342 H 16.666667 V 0 Z m 20 0 v 1.7642342 h 3.010416 V 0 Z m 6.34375 0 v 1.7642342 h 86.89583 V 0 Z m 90.22917 0 v 1.7642342 h 3.09375 V 0 Z M 123 0 v 1.7642342 h 14.46875 V 36.56776 H 140 V 0 Z M 37.479166 22.844828 V 39.55493 h -7.625 V 69.927824 H 9.9166666 v 65.697666 h -8 V 103.09743 H 0 v 89.36447 h 16.666667 v -2.26543 h -1.25 v -51.80433 h 1.25 v -2.76665 h -1.25 V 75.220526 h 14.437499 v 9.402566 h 11.1875 v 1.15276 l -4.125 0.99236 -0.89584 2.034884 5.020832 2.074978 -0.0104 0.01 2.364584 0.97234 -1.28126 0.31074 -0.0104 -0.02 -6.1875 1.48356 0.5625 2.145142 4.46875 1.84444 v 0.78188 h 2.291686 v -2.245442 l -3.072918 -1.26302 0.54166 -0.1304 v 0.02 l 6.1875 -1.48352 0.90626 -2.034886 -5.03125 -2.074982 0.0104 -0.01 -2.364584 -0.97234 3.25 -0.78188 -0.33334 -1.28308 v -1.52354 H 53.96877 V 75.22052 h 52.80208 v 60.40497 h -80.4271 v 2.76664 h 80.42708 v 51.80434 H 26.34375 v 2.26543 h -3.333334 v -2.26543 H 20 v 2.26543 H 16.666667 V 200 H 26.5 v -7.5381 h 86.66667 V 200 H 123 v -7.5381 h -3.33333 v -2.26543 h -3.09375 v 2.26543 h -3.33334 v -2.26543 h -0.75 v -51.80433 h 0.75 v -2.76665 h -0.75 V 69.927824 H 53.968752 V 39.55493 h -7.885418 v -8.660786 l 0.0312 -0.01 -0.0312 -0.05 V 22.844828 Z M 123 192.4619 h 17 v -89.36447 h -2.53125 v 32.52806 H 123 v 2.76665 h 14.46875 v 51.80433 H 123 Z M 39.177084 24.328388 l 5.166666 0.03 0.0208 4.210104 -5.197918 2.355652 z m 5.197916 7.347632 0.03126 7.87891 h -5.260416 l 0.0104 -5.513232 z M 0 40.416998 v 3.047316 h 1.9166666 v -3.047316 z m 137.46875 0 v 3.047316 H 140 V 40.416998 Z M 31.135416 41.048516 h 21.59375 v 7.327586 H 39.5 V 47.664398 H 31.135416 Z M 0 47.313552 v 45.03809 h 1.9166666 v -45.03809 z m 137.46875 0 v 45.03809 H 140 V 47.313552 Z M 39.5 49.01764 H 52.729166 V 60.084198 H 31.135416 V 49.819564 H 39.5 Z m -8.364584 12.510022 h 21.59375 v 8.400162 h -4.15625 a 7.411609 6.7361666 0 0 0 -6.864582 -4.190054 7.411609 6.7361666 0 0 0 -6.854168 4.190054 h -3.71875 z m 10.583334 8.941462 a 2.3161276 2.085004 0 0 1 0.0104 0 2.3161276 2.085004 0 0 1 0.0208 0 2.3161276 2.085004 0 0 1 2.322916 2.085004 2.3161276 2.085004 0 0 1 -2.322866 2.085006 2.3161276 2.085004 0 0 1 -2.3125 -2.085006 2.3161276 2.085004 0 0 1 2.28125 -2.085004 z m -10.583334 4.751402 h 3.8125 a 7.411609 6.7361666 0 0 0 6.760418 3.989576 7.411609 6.7361666 0 0 0 6.770832 -3.989576 h 4.25 v 7.608262 H 31.135416 Z M 0 96.20088 v 3.047314 H 1.9166666 V 96.20088 Z m 137.46875 0 v 3.047314 H 140 V 96.20088 Z M 20 135.62549 v 2.76665 h 3.010416 v -2.76665 z m 96.57292 0 v 2.76665 h 3.09375 v -2.76665 z M 1.9166666 138.39214 h 8 v 51.80433 h -8 z M 17.78125 193.48436 h 7.447916 v 5.58338 H 17.78125 Z m 96.51042 0.01 h 7.44791 v 5.58339 h -7.44791 z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+
+                                        </Canvas>
+                                    </Canvas>
+
+                                </UserControl>
+                            </Viewbox>
+                            
+                        </Grid>
+
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--HAWE_Pressure-->
+    <!--Needed Info: Width = 180
+                     Height = 60
+                     Translate X = 0
+                     Translate Y = 0-->
+    <Style TargetType="{x:Type local:HAWE_Pressure}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_Pressure}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Popup x:Name="Popup" IsOpen="True" HorizontalAlignment="Left" FlowDirection="LeftToRight" Placement="Right">
+                                <StackPanel Background="White">
+                                    <TextBlock Foreground="{TemplateBinding Foreground}">Testing Popup</TextBlock>
+                                    <TextBlock Foreground="{TemplateBinding Foreground}">Testing Popup</TextBlock>
+                                    <TextBlock Foreground="{TemplateBinding Foreground}">Testing Popup</TextBlock>
+                                    <TextBlock Foreground="{TemplateBinding Foreground}">Testing Popup</TextBlock>
+                                    <TextBlock Foreground="{TemplateBinding Foreground}">Testing Popup</TextBlock>
+                                </StackPanel>
+                            </Popup>
+
+                            <Label Grid.Row="0" Content="{TemplateBinding Label}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center"/>
+
+                            <Viewbox x:Name="Viewbox" Grid.Row="1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                            <UserControl x:Name="UC_Icon">
+
+                                <Canvas x:Name="OuterCanvas" Width="180" Height="60">
+                                    <Canvas.RenderTransform>
+                                        <TransformGroup>
+                                            <TranslateTransform X="0" Y="0" />
+                                            <RotateTransform Angle="0" CenterX="90" CenterY="30"/>
+                                        </TransformGroup>
+                                    </Canvas.RenderTransform>
+                                    <Canvas.Resources/>
+
+                                    <Canvas x:Name="InnerCanvas">
+
+                                            <Path x:Name="Path" Fill="{Binding ElementName=UC_Icon, Path=Foreground}" StrokeThickness="5.45068" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                            <Path.Data>
+                                                <PathGeometry Figures="M 9.5521354e-5 -1.1894135e-4 V 59.999881 H 180.0001 V -1.1894135e-4 h -5.71861 V 0.0698523 L 160.79143 -1.1893345e-4 Z M 5.7187166 5.5519844 174.28149 6.4268504 V 53.922925 L 5.7187166 54.110265 Z" FillRule="NonZero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        
+                                    </Canvas>
+                                </Canvas>
+
+                            </UserControl>
+                        </Viewbox>
+
+                        </Grid>
+                        
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Popup" Property="IsOpen" Value="True"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="Popup" Property="IsOpen" Value="False"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--HAWE_PumpSmall-->
+    <!--Needed Info: Width = 120
+                     Height = 160
+                     Translate X = 0
+                     Translate Y = 0-->
+    <Style TargetType="{x:Type local:HAWE_PumpSmall}">
+        <Setter Property="Height" Value="182"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="Black"/>        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_PumpSmall}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid x:Name="MainGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Button x:Name="Button"  Grid.Row="0" Grid.RowSpan="2" Background="Transparent" BorderBrush="Transparent" Command="{x:Static local:HAWE_PumpSmall.ChangeFlowDirectionCommand}"/>
+                            
+                            <Label Grid.Row="0" Content="{TemplateBinding Label}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center"/>
+
+                            <Viewbox x:Name="Viewbox" Grid.Row="1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                <UserControl x:Name="UC_Icon">
+
+                                    <Canvas x:Name="OuterCanvas" Width="120" Height="160">
+                                        <Canvas.RenderTransform>
+                                            <TransformGroup>
+                                                <TranslateTransform X="0" Y="0" />
+                                                <RotateTransform Angle="0" CenterX="90" CenterY="30"/>
+                                            </TransformGroup>
+                                        </Canvas.RenderTransform>
+                                        <Canvas.Resources/>
+
+                                        <Canvas x:Name="InnerCanvas">
+
+                                            <Path x:Name="Path" Fill="{Binding ElementName=UC_Icon, Path=Foreground}" StrokeThickness="3.22503" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M 60.001884 4.6116773e-4 A 59.997954 58.100542 0 0 0 0 58.101521 59.997954 58.100542 0 0 0 59.482432 116.19479 v 7.68652 l -10.057281 4.18628 1.761455 3.90562 12.865647 4.98142 0.0083 -0.015 0.06285 0.0242 -8.709566 3.625 0.01575 0.0317 -5.260014 2.19055 1.761453 3.90562 7.10252 2.74408 v 10.53978 h 4.431907 v -8.82469 l 0.03135 0.008 v -4.58385 l -5.836251 -2.26073 7.005131 -2.91558 -0.01575 -0.0392 5.251891 -2.18279 1.655898 -3.94461 -12.857637 -4.97363 v 0.008 l -1.793811 -0.69379 7.013142 -2.91558 V 116.07172 A 59.997954 58.100542 0 0 0 120 58.103105 59.997954 58.100542 0 0 0 60.006282 0.00204515 Z M 59.230639 4.2646874 a 55.508307 53.834412 0 0 1 0.0083 0 55.508307 53.834412 0 0 1 0.55134 0 A 55.508307 53.834412 0 0 1 115.30342 58.101521 55.508307 53.834412 0 0 1 59.790303 111.93055 55.508307 53.834412 0 0 1 4.2851982 58.101521 55.508307 53.834412 0 0 1 59.230168 4.2646874 Z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                            
+                                        </Canvas>
+                                    </Canvas>
+
+                                </UserControl>
+                            </Viewbox>
+
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Button" Property="Background" Value="SteelBlue"/>
+                            <Setter TargetName="MainGrid" Property="Background" Value="SteelBlue"/>
+                        </Trigger>
+                        <Trigger Property="SwitchFlowDirection" Value="True">
+                            <Setter TargetName="Button" Property="Background" Value="DarkGreen"/>
+                        </Trigger>
+                        <Trigger Property="SwitchFlowDirection" Value="False">
+                            <Setter TargetName="Button" Property="Background" Value="DarkRed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!--HAWE_PumpBig-->
+    <!--Needed Info: Width = 140
+                     Height = 140
+                     Translate X = 0
+                     Translate Y = 0-->
+    <Style TargetType="{x:Type local:HAWE_PumpBig}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_PumpBig}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Grid.Row="0" Content="{TemplateBinding Label}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center"/>
+
+                            <Viewbox x:Name="Viewbox" Grid.Row="1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                <UserControl Name="UC_Icon">
+
+                                    <Canvas x:Name="OuterCanvas" Width="140" Height="140">
+                                        <Canvas.RenderTransform>
+                                            <TranslateTransform X="0" Y="0"/>
+                                        </Canvas.RenderTransform>
+                                        <Canvas.Resources/>
+
+                                        <Canvas x:Name="InnerCanvas">
+                                            
+                                            <Path x:Name="Path" Fill="{Binding ElementName=UC_Icon, Path=Foreground}" StrokeThickness="3.8236" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M 70.004091 3.9181996e-4 A 70.000117 69.999367 0 0 0 3.8131403e-4 70.000389 70.000117 69.999367 0 0 0 70.004091 140.00039 70.000117 69.999367 0 0 0 140.00038 70.000389 70.000117 69.999367 0 0 0 70.004091 3.9181996e-4 Z M 69.76178 5.1415495 A 64.762006 64.85955 0 0 1 134.52846 70.000389 64.762006 64.85955 0 0 1 69.76178 134.85923 64.762006 64.85955 0 0 1 5.0025092 70.000389 64.762006 64.85955 0 0 1 69.76178 5.1415495 Z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+                                            
+                                        </Canvas>
+                                    </Canvas>
+
+                                </UserControl>
+                            </Viewbox>
+
+                        </Grid>
+                        
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+</ResourceDictionary>
