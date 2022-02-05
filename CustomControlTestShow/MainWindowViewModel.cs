@@ -1,5 +1,7 @@
 ﻿using CustomControlTestShow.Common;
+using CustomControlTestShow.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 
@@ -12,6 +14,15 @@ namespace CustomControlTestShow
             //Commands
             ExampleCommand = new DelegateCommand(ExecuteExample, CanExecuteExample);
             IsFlowDirectionInverted = null;
+
+            ItemsControlTestModels = new List<ItemsControlTestModel>()
+            {
+                new ItemsControlTestModel("Sample Name 1"),
+                new ItemsControlTestModel("Sample Name 2"),
+                new ItemsControlTestModel("Sample Name 3"),
+                new ItemsControlTestModel("Sample Name 4"),
+                new ItemsControlTestModel("Sample Name 5"),
+            };
         }
 
         #region Ok command
@@ -58,6 +69,13 @@ namespace CustomControlTestShow
         {
             get { return _isFlowDirectionInverted; }
             set { SetField(ref _isFlowDirectionInverted, value); }
+        }
+
+        private List<ItemsControlTestModel> _itemsControlTestModels;
+        public List<ItemsControlTestModel> ItemsControlTestModels
+        {
+            get { return _itemsControlTestModels; }
+            set { SetField(ref _itemsControlTestModels, value); }
         }
 
         #endregion
