@@ -3,23 +3,68 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:CustomControls">
 
+    <!--HAWE_FlowArrow-->
+    <!--Needed Info: Width = 21
+                     Height = 14
+                     Translate X = 0
+                     Translate Y = 0-->
+    <Style TargetType="{x:Type local:HAWE_FlowArrow}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="Height" Value="14"/>
+        <Setter Property="Width" Value="21"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_FlowArrow}">
+
+                    <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+
+                        <UserControl x:Name="UC_Icon">
+
+                            <Canvas x:Name="OuterCanvas" Width="21" Height="14">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </Canvas.RenderTransform>
+                                <Canvas.Resources/>
+
+                                <Canvas x:Name="InnerCanvas">
+                                    <Path x:Name="Path01" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FF280B0B" StrokeThickness="0.261463">
+                                        <Path.Data>
+                                            <PathGeometry Figures="M 0 0 6.9984685 6.9775642 0 13.954618 0.04551814 14 H 6.9529504 L 10.497188 10.465837 13.996424 6.9775642 10.497188 3.4887816 6.9979553 0 Z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path x:Name="Path02" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FF800000" StrokeThickness="0.261463">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m 7.0061382 0.00102028 -0.00205 0.00207213 6.9979548 6.97756419 -6.9979548 6.9770544 0.016366 0.01632 h 6.9652238 l 3.5156 -3.505099 L 21 6.9806606 17.501278 3.491878 13.999486 0.00105679 Z" FillRule="NonZero"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Canvas>
+
+                        </UserControl>
+                                    
+                    </Viewbox>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
     <!--HAWE_CircuitHorizontalLine-->
     <Style TargetType="{x:Type local:HAWE_CircuitHorizontalLine}">
         <Setter Property="Background" Value="Black"/>
         <Setter Property="Foreground" Value="Black"/>
-        <Setter Property="FlowColor" Value="SteelBlue"/>
-        <Setter Property="IsFlowLeftToRight" Value="{x:Null}"/>
+        <!--<Setter Property="FlowColor" Value="SteelBlue"/>-->
+        <!--<Setter Property="IsFlowLeftToRight" Value="{x:Null}"/>-->
         <Setter Property="Height" Value="6"/>
         <Setter Property="Width" Value="200"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HAWE_CircuitHorizontalLine}">
 
-                        <Border x:Name="PART_Indicator" Grid.Column="0" Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Canvas x:Name="PART_MainCanvas" Background="{TemplateBinding Background}">
 
-                            <Grid x:Name="Animation" ClipToBounds="True">
+                            <!--<Grid x:Name="Animation" ClipToBounds="True">
                                 
                             <Rectangle Name="RectangleLeftToRight" Width="{TemplateBinding Width}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Fill="{TemplateBinding FlowColor}">
                                 <Rectangle.Triggers>
@@ -30,7 +75,7 @@
                                                 <DoubleAnimation
                                                     Storyboard.TargetName="RectangleLeftToRight"
                                                     Storyboard.TargetProperty="Width"
-                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_Indicator}" Duration="0:0:5"
+                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_OuterBorder}" Duration="0:0:5"
                                                     RepeatBehavior="Forever" />
                                             </Storyboard>
                                         </BeginStoryboard>
@@ -48,7 +93,7 @@
                                                 <DoubleAnimation
                                                     Storyboard.TargetName="RectangleRightToLeft"
                                                     Storyboard.TargetProperty="Width"
-                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_Indicator}" Duration="0:0:5"
+                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_OuterBorder}" Duration="0:0:5"
                                                     RepeatBehavior="Forever" />
                                             </Storyboard>
                                         </BeginStoryboard>
@@ -57,12 +102,12 @@
                                 </Rectangle.Triggers>
                             </Rectangle>
 
-                        </Grid>
+                        </Grid>-->
 
-                        </Border>
+                        </Canvas>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsFlowLeftToRight" Value="True">
+                        <!--<Trigger Property="IsFlowLeftToRight" Value="True">
                             <Setter TargetName="RectangleLeftToRight" Property="Visibility" Value="Visible"/>
                             <Setter TargetName="RectangleRightToLeft" Property="Visibility" Value="Collapsed"/>
                             <Setter Property="FlowColor" Value="Orange"/>
@@ -75,7 +120,7 @@
                         <Trigger Property="IsFlowLeftToRight" Value="{x:Null}">
                             <Setter TargetName="RectangleLeftToRight" Property="Visibility" Value="Collapsed"/>
                             <Setter TargetName="RectangleRightToLeft" Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

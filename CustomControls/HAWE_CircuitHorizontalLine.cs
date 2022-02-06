@@ -51,16 +51,103 @@ namespace CustomControls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HAWE_CircuitHorizontalLine), new FrameworkPropertyMetadata(typeof(HAWE_CircuitHorizontalLine)));
         }
 
-
-
         #region OnApplyTemplate
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            //// How to get item from xaml
-            //Canvas outerCanvas = GetTemplateChild("Template child Name") as Canvas;
+            GetControls();
+
+            SetControls();
+        }
+
+        private void GetControls()
+        {
+            Canvas = GetTemplateChild("PART_MainCanvas") as Canvas;
+        }
+
+        private void SetControls()
+        {
+            SetFlowArrows();
+        }
+
+        #endregion
+
+        #region Private fields
+
+        private const double _arrowWidthToHeightRatio = 21 / 14;
+
+        #endregion
+
+        #region PART_OuterBorder
+
+        private Canvas _canvas;
+        private Canvas Canvas
+        {
+            get { return _canvas; }
+            set
+            {
+                //if (_canvas != null)
+                //{
+                //    _border.MouseMove -= PART_DisplayGrid_MouseMove;
+                //    _border.DragOver -= PART_DisplayGrid_DragOver;
+                //    _border.Drop -= PART_DisplayGrid_Drop;
+                //}
+
+                _canvas = value;
+
+                if (_canvas != null)
+                {
+                    //_border.AllowDrop = true;
+                    //_border.MouseMove += PART_DisplayGrid_MouseMove;
+                    //_border.DragOver += PART_DisplayGrid_DragOver;
+                    //_border.Drop += PART_DisplayGrid_Drop;
+                }
+            }
+        }
+
+        private void SetFlowArrows()
+        {
+            if (Canvas == null)
+                return;
+
+            double canvasActualWidth = Canvas.ActualWidth;
+            double canvasActualHeight = Canvas.ActualHeight;
+
+            if ()
+                return;
+
+            double arrowWidth = canvasActualHeight * _arrowWidthToHeightRatio;
+
+
+            //_matrixBorderNames = new List<string>();
+
+            //for (int i = 0; i < MatrixSize; i++)
+            //{
+            //    ColumnDefinition gridCol = new ColumnDefinition();
+            //    RowDefinition gridRow = new RowDefinition();
+            //    gridRow.Height = new GridLength(1, GridUnitType.Star);
+            //    Grid.RowDefinitions.Add(gridRow);
+            //    Grid.ColumnDefinitions.Add(gridCol);
+            //}
+
+            //for (int rowNumber = 0; rowNumber < MatrixSize; rowNumber++)
+            //{
+            //    for (int columnNumber = 0; columnNumber < MatrixSize; columnNumber++)
+            //    {
+            //        Border border = new Border();
+            //        border.Background = Brushes.Transparent;
+            //        border.BorderBrush = Brushes.LightGray;
+            //        border.BorderThickness = new Thickness(1);
+            //        border.Margin = new Thickness(0);
+            //        border.Name = $"MatrixElementBorder_{rowNumber}_{columnNumber}";
+            //        _matrixBorderNames.Add(border.Name);
+            //        Grid.SetRow(border, rowNumber);
+            //        Grid.SetColumn(border, columnNumber);
+            //        Grid.Children.Add(border);
+            //    }
+            //}
         }
 
         #endregion
@@ -107,5 +194,10 @@ namespace CustomControls
 
         #endregion
 
+        #region Private methods
+
+
+
+        #endregion
     }
 }
