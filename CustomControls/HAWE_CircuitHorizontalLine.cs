@@ -78,7 +78,7 @@ namespace CustomControls
         #region Private fields
 
         private double _arrowWidthToHeightRatio = 1.5;
-        private double _arrowStartOffset = 0;
+        private double arrowSpeed = 30; // [mm/s]
 
         #endregion
 
@@ -139,15 +139,15 @@ namespace CustomControls
                 hAWE_FlowArrow.Height = correctedArrowHeight;
                 hAWE_FlowArrow.Width = correctedArrowWidth;
                 Canvas.SetTop(hAWE_FlowArrow, 0);
-                Canvas.SetLeft(hAWE_FlowArrow, (correctedArrowWidth * currentArrowCount) + _arrowStartOffset);
+                Canvas.SetLeft(hAWE_FlowArrow, (correctedArrowWidth * currentArrowCount));
                 MainCanvas.Children.Add(hAWE_FlowArrow);
 
-                var initialDuration = (canvasWidth - (_arrowStartOffset + (currentArrowCount * correctedArrowWidth))) * 2 / canvasWidth;
+                var initialDuration = (canvasWidth - (currentArrowCount * correctedArrowWidth)) / arrowSpeed;
                 TimeSpan finalMovementBeginTime = TimeSpan.FromSeconds(initialDuration);
 
                 var initialMovement = new DoubleAnimation()
                 {
-                    From = (correctedArrowWidth * currentArrowCount) + _arrowStartOffset,
+                    From = (correctedArrowWidth * currentArrowCount),
                     To = canvasWidth - correctedArrowWidth,
                     BeginTime = new TimeSpan(0, 0, 0, 0),
                     Duration = TimeSpan.FromSeconds(initialDuration),
@@ -156,10 +156,10 @@ namespace CustomControls
 
                 var finalRepeatMovement = new DoubleAnimation()
                 {
-                    From = _arrowStartOffset,
+                    From = 0,
                     To = canvasWidth - correctedArrowWidth,
                     BeginTime = finalMovementBeginTime,
-                    Duration = TimeSpan.FromSeconds(2),
+                    Duration = TimeSpan.FromSeconds(canvasWidth / arrowSpeed),
                     RepeatBehavior = RepeatBehavior.Forever,
                 };
 

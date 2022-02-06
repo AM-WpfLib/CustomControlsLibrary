@@ -28,12 +28,12 @@
                                 <Canvas.Resources/>
 
                                 <Canvas x:Name="InnerCanvas">
-                                    <Path x:Name="Path01" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FF280B0B" StrokeThickness="0.261463">
+                                    <Path x:Name="Path01" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="DarkRed" StrokeThickness="0.261463">
                                         <Path.Data>
                                             <PathGeometry Figures="M 0 0 6.9984685 6.9775642 0 13.954618 0.04551814 14 H 6.9529504 L 10.497188 10.465837 13.996424 6.9775642 10.497188 3.4887816 6.9979553 0 Z" FillRule="NonZero"/>
                                         </Path.Data>
                                     </Path>
-                                    <Path x:Name="Path02" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FF800000" StrokeThickness="0.261463">
+                                    <Path x:Name="Path02" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="Red" StrokeThickness="0.261463">
                                         <Path.Data>
                                             <PathGeometry Figures="m 7.0061382 0.00102028 -0.00205 0.00207213 6.9979548 6.97756419 -6.9979548 6.9770544 0.016366 0.01632 h 6.9652238 l 3.5156 -3.505099 L 21 6.9806606 17.501278 3.491878 13.999486 0.00105679 Z" FillRule="NonZero"/>
                                         </Path.Data>
