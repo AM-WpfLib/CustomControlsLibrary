@@ -474,6 +474,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource HAWE_ItemStyle}" />
         <Setter Property="MinWidth" Value="120" />
         <Setter Property="MinHeight" Value="95" />
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HAWE_ItemsControl}">
