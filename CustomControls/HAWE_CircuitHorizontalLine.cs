@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -64,7 +65,7 @@ namespace CustomControls
 
         private void GetControls()
         {
-            Canvas = GetTemplateChild("PART_MainCanvas") as Canvas;
+            MainCanvas = GetTemplateChild("PART_MainCanvas") as Canvas;
         }
 
         private void SetControls()
@@ -76,16 +77,17 @@ namespace CustomControls
 
         #region Private fields
 
-        private const double _arrowWidthToHeightRatio = 21 / 14;
+        private double _arrowWidthToHeightRatio = 1.5;
+        private double _arrowStartOffset = 0;
 
         #endregion
 
         #region PART_OuterBorder
 
-        private Canvas _canvas;
-        private Canvas Canvas
+        private Canvas _mainCanvas;
+        private Canvas MainCanvas
         {
-            get { return _canvas; }
+            get { return _mainCanvas; }
             set
             {
                 //if (_canvas != null)
@@ -95,9 +97,9 @@ namespace CustomControls
                 //    _border.Drop -= PART_DisplayGrid_Drop;
                 //}
 
-                _canvas = value;
+                _mainCanvas = value;
 
-                if (_canvas != null)
+                if (_mainCanvas != null)
                 {
                     //_border.AllowDrop = true;
                     //_border.MouseMove += PART_DisplayGrid_MouseMove;
@@ -109,45 +111,91 @@ namespace CustomControls
 
         private void SetFlowArrows()
         {
-            if (Canvas == null)
+            if (MainCanvas == null)
                 return;
 
-            double canvasActualWidth = Canvas.ActualWidth;
-            double canvasActualHeight = Canvas.ActualHeight;
+            double canvasWidth = MainCanvas.Width;
+            double canvasHeight = MainCanvas.Height;
 
-            if ()
+            if (canvasWidth <= 0 || canvasHeight <= 0)
                 return;
 
-            double arrowWidth = canvasActualHeight * _arrowWidthToHeightRatio;
+            if (!IsValidDoubleValue(canvasWidth) || !IsValidDoubleValue(canvasHeight))
+                return;
+
+            double correctedArrowHeight = canvasHeight;
+            double correctedArrowWidth = canvasHeight * _arrowWidthToHeightRatio;
+            int totalArrowCount = Convert.ToInt32(Math.Floor(canvasWidth / correctedArrowWidth));
+
+            if (totalArrowCount < 1)
+                return;
+
+            var storyBoard = new Storyboard();
+
+            for (int currentArrowCount = 0; currentArrowCount < totalArrowCount; currentArrowCount++)
+            {
+                HAWE_FlowArrow hAWE_FlowArrow = new HAWE_FlowArrow();
+                hAWE_FlowArrow.Name = $"HAWE_FlowArrow_{currentArrowCount}";
+                hAWE_FlowArrow.Height = correctedArrowHeight;
+                hAWE_FlowArrow.Width = correctedArrowWidth;
+                Canvas.SetTop(hAWE_FlowArrow, 0);
+                Canvas.SetLeft(hAWE_FlowArrow, (correctedArrowWidth * currentArrowCount) + _arrowStartOffset);
+                MainCanvas.Children.Add(hAWE_FlowArrow);
+
+                var initialDuration = (canvasWidth - (_arrowStartOffset + (currentArrowCount * correctedArrowWidth))) * 2 / canvasWidth;
+                TimeSpan finalMovementBeginTime = TimeSpan.FromSeconds(initialDuration);
+
+                var initialMovement = new DoubleAnimation()
+                {
+                    From = (correctedArrowWidth * currentArrowCount) + _arrowStartOffset,
+                    To = canvasWidth - correctedArrowWidth,
+                    BeginTime = new TimeSpan(0, 0, 0, 0),
+                    Duration = TimeSpan.FromSeconds(initialDuration),
+                    RepeatBehavior = new RepeatBehavior(1),
+                };
+
+                var finalRepeatMovement = new DoubleAnimation()
+                {
+                    From = _arrowStartOffset,
+                    To = canvasWidth - correctedArrowWidth,
+                    BeginTime = finalMovementBeginTime,
+                    Duration = TimeSpan.FromSeconds(2),
+                    RepeatBehavior = RepeatBehavior.Forever,
+                };
+
+                Storyboard.SetTarget(initialMovement, hAWE_FlowArrow);
+                Storyboard.SetTargetProperty(initialMovement, new PropertyPath(Canvas.LeftProperty));
+
+                Storyboard.SetTarget(finalRepeatMovement, hAWE_FlowArrow);
+                Storyboard.SetTargetProperty(finalRepeatMovement, new PropertyPath(Canvas.LeftProperty));
+
+                storyBoard.Children.Add(initialMovement);
+                storyBoard.Children.Add(finalRepeatMovement);
+
+            }
+
+            Border leftBorder = new Border();
+            leftBorder.Height = this.Height;
+            leftBorder.Width = correctedArrowWidth;
+            leftBorder.Background = Brushes.Gray;
+            leftBorder.BorderBrush = Brushes.Black;
+            leftBorder.BorderThickness = new Thickness(1,1,0,1);
+            Canvas.SetTop(leftBorder, 0);
+            Canvas.SetLeft(leftBorder, 0);
+            MainCanvas.Children.Add(leftBorder);
+
+            Border rightBorder = new Border();
+            rightBorder.Height = canvasHeight;
+            rightBorder.Width = correctedArrowWidth;
+            rightBorder.Background = Brushes.Gray;
+            rightBorder.BorderBrush = Brushes.Black;
+            rightBorder.BorderThickness = new Thickness(0, 1, 1, 1);
+            Canvas.SetTop(rightBorder, 0);
+            Canvas.SetRight(rightBorder, 0);
+            MainCanvas.Children.Add(rightBorder);
 
 
-            //_matrixBorderNames = new List<string>();
-
-            //for (int i = 0; i < MatrixSize; i++)
-            //{
-            //    ColumnDefinition gridCol = new ColumnDefinition();
-            //    RowDefinition gridRow = new RowDefinition();
-            //    gridRow.Height = new GridLength(1, GridUnitType.Star);
-            //    Grid.RowDefinitions.Add(gridRow);
-            //    Grid.ColumnDefinitions.Add(gridCol);
-            //}
-
-            //for (int rowNumber = 0; rowNumber < MatrixSize; rowNumber++)
-            //{
-            //    for (int columnNumber = 0; columnNumber < MatrixSize; columnNumber++)
-            //    {
-            //        Border border = new Border();
-            //        border.Background = Brushes.Transparent;
-            //        border.BorderBrush = Brushes.LightGray;
-            //        border.BorderThickness = new Thickness(1);
-            //        border.Margin = new Thickness(0);
-            //        border.Name = $"MatrixElementBorder_{rowNumber}_{columnNumber}";
-            //        _matrixBorderNames.Add(border.Name);
-            //        Grid.SetRow(border, rowNumber);
-            //        Grid.SetColumn(border, columnNumber);
-            //        Grid.Children.Add(border);
-            //    }
-            //}
+            storyBoard.Begin(this);
         }
 
         #endregion
@@ -196,7 +244,11 @@ namespace CustomControls
 
         #region Private methods
 
-
+        // checks if double value is not NaN, +ve infinity, or -ve infinity
+        private bool IsValidDoubleValue(double value)
+        {
+            return !Double.IsNaN(value) && !Double.IsInfinity(value) && !Double.IsNegativeInfinity(value);
+        }
 
         #endregion
     }

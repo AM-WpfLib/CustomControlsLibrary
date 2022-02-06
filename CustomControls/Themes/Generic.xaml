@@ -52,8 +52,10 @@
     
     <!--HAWE_CircuitHorizontalLine-->
     <Style TargetType="{x:Type local:HAWE_CircuitHorizontalLine}">
-        <Setter Property="Background" Value="Black"/>
-        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="1"/>
         <!--<Setter Property="FlowColor" Value="SteelBlue"/>-->
         <!--<Setter Property="IsFlowLeftToRight" Value="{x:Null}"/>-->
         <Setter Property="Height" Value="6"/>
@@ -62,49 +64,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:HAWE_CircuitHorizontalLine}">
 
-                        <Canvas x:Name="PART_MainCanvas" Background="{TemplateBinding Background}">
+                    <Canvas x:Name="PART_MainCanvas" Background="Transparent" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}">
 
-                            <!--<Grid x:Name="Animation" ClipToBounds="True">
-                                
-                            <Rectangle Name="RectangleLeftToRight" Width="{TemplateBinding Width}" HorizontalAlignment="Left" VerticalAlignment="Stretch" Fill="{TemplateBinding FlowColor}">
-                                <Rectangle.Triggers>
-                                    
-                                    <EventTrigger RoutedEvent="Rectangle.Loaded">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetName="RectangleLeftToRight"
-                                                    Storyboard.TargetProperty="Width"
-                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_OuterBorder}" Duration="0:0:5"
-                                                    RepeatBehavior="Forever" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-                                    
-                                </Rectangle.Triggers>
-                            </Rectangle>
+                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Height="{TemplateBinding Height}" Width="{TemplateBinding Width}"/>
 
-                            <Rectangle Name="RectangleRightToLeft" Width="{TemplateBinding Width}" HorizontalAlignment="Right" VerticalAlignment="Stretch" Fill="{TemplateBinding FlowColor}">
-                                <Rectangle.Triggers>
+                        <Border Canvas.Left="0" Canvas.Top="0" Width="10" Height="{TemplateBinding Height}" Background="White" />
+                        <Border Canvas.Right="0" Canvas.Top="0" Width="10" Height="{TemplateBinding Height}" Background="White"/>
 
-                                    <EventTrigger RoutedEvent="Rectangle.Loaded">
-                                        <BeginStoryboard>
-                                            <Storyboard>
-                                                <DoubleAnimation
-                                                    Storyboard.TargetName="RectangleRightToLeft"
-                                                    Storyboard.TargetProperty="Width"
-                                                    From="0.0" To="{Binding Path=Width, ElementName=PART_OuterBorder}" Duration="0:0:5"
-                                                    RepeatBehavior="Forever" />
-                                            </Storyboard>
-                                        </BeginStoryboard>
-                                    </EventTrigger>
-
-                                </Rectangle.Triggers>
-                            </Rectangle>
-
-                        </Grid>-->
-
-                        </Canvas>
+                    </Canvas>
 
                     <ControlTemplate.Triggers>
                         <!--<Trigger Property="IsFlowLeftToRight" Value="True">

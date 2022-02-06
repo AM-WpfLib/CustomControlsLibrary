@@ -24,8 +24,13 @@
                 </StackPanel>
             </Grid>
 
-            <ctr:HAWE_FlowArrow Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Viewbox>
+                <Canvas>
 
+                    <ctr:HAWE_CircuitHorizontalLine HorizontalAlignment="Left" Height="10" Margin="258,176,0,0" Grid.Row="1" VerticalAlignment="Top" Width="500"/>
+
+                </Canvas>
+            </Viewbox>
 
         </Grid>
 
