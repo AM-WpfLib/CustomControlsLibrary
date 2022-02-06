@@ -1,9 +1,7 @@
-﻿using CustomControlTestShow.Common;
-using CustomControlTestShow.Models;
-using System;
+﻿using CustomControls.Elements.Interfaces;
+using CustomControls.Elements.Models;
+using CustomControlTestShow.Common;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace CustomControlTestShow
 {
@@ -15,13 +13,13 @@ namespace CustomControlTestShow
             ExampleCommand = new DelegateCommand(ExecuteExample, CanExecuteExample);
             IsFlowDirectionInverted = null;
 
-            ItemsControlTestModels = new List<ItemsControlTestModel>()
+            ItemsControlTestModels = new List<IItemsPresenterModel>()
             {
-                new ItemsControlTestModel("Sample Name 1"),
-                new ItemsControlTestModel("Sample Name 2"),
-                new ItemsControlTestModel("Sample Name 3"),
-                new ItemsControlTestModel("Sample Name 4"),
-                new ItemsControlTestModel("Sample Name 5"),
+                new ItemsPresenterModel(0, "Sample Name 1", 32.0),
+                new ItemsPresenterModel(1, "Sample Name 2", 32.0),
+                new ItemsPresenterModel(2, "Sample Name 3", 32.0),
+                new ItemsPresenterModel(3, "Sample Name 4", 32.0),
+                new ItemsPresenterModel(4, "Sample Name 5", 32.0),
             };
         }
 
@@ -71,8 +69,8 @@ namespace CustomControlTestShow
             set { SetField(ref _isFlowDirectionInverted, value); }
         }
 
-        private List<ItemsControlTestModel> _itemsControlTestModels;
-        public List<ItemsControlTestModel> ItemsControlTestModels
+        private List<IItemsPresenterModel> _itemsControlTestModels;
+        public List<IItemsPresenterModel> ItemsControlTestModels
         {
             get { return _itemsControlTestModels; }
             set { SetField(ref _itemsControlTestModels, value); }

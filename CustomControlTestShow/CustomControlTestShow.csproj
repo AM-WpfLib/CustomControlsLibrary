@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CustomControls.Elements\CustomControls.Elements.csproj" />
     <ProjectReference Include="..\CustomControls\CustomControls.csproj" />
   </ItemGroup>
 

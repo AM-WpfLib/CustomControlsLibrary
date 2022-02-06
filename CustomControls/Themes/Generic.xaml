@@ -492,16 +492,16 @@
 
                             <Grid x:Name="PART_DisplayGrid" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" >
                                 
-                                <Button Grid.Row="0" Grid.Column="0">Button1</Button>
+                                <!--<Button Grid.Row="0" Grid.Column="0">Button1</Button>
                                 <Button Grid.Row="0" Grid.Column="1">Button2</Button>
                                 <Button Grid.Row="0" Grid.Column="2">Button3</Button>
-                                <Button Grid.Row="1" Grid.Column="0">Button4</Button>
+                                <Button Grid.Row="1" Grid.Column="0">Button4</Button>-->
                                 
                                                                 
                             </Grid>
                             
                             <ScrollViewer Grid.Column="1" Margin="0" Focusable="false" Background="Transparent" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                                <ItemsPresenter Margin="2" />
+                                <ItemsPresenter x:Name="PART_ItemsPresenter" Margin="2"/>
                             </ScrollViewer>
                             
                         </Grid>
