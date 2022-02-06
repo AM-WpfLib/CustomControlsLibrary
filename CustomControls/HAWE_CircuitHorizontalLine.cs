@@ -51,6 +51,22 @@ namespace CustomControls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HAWE_CircuitHorizontalLine), new FrameworkPropertyMetadata(typeof(HAWE_CircuitHorizontalLine)));
         }
 
+
+
+        #region OnApplyTemplate
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            //// How to get item from xaml
+            //Canvas outerCanvas = GetTemplateChild("Template child Name") as Canvas;
+        }
+
+        #endregion
+
+        #region Dependancy Properties
+
         #region Flow Color
 
         /// <summary>
@@ -88,16 +104,6 @@ namespace CustomControls
             DependencyProperty.Register("IsFlowLeftToRight", typeof(bool?), typeof(HAWE_CircuitHorizontalLine), new FrameworkPropertyMetadata(null));
 
         #endregion
-
-        #region example of OnApplyTemplate --> gets control from xaml
-
-        //public override void OnApplyTemplate()
-        //{
-        //    base.OnApplyTemplate();
-
-        //    //// How to get item from xaml
-        //    //Canvas outerCanvas = GetTemplateChild("Template child Name") as Canvas;
-        //}
 
         #endregion
 
