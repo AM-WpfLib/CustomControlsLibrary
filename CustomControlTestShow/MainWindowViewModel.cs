@@ -12,6 +12,9 @@ namespace CustomControlTestShow
             //Commands
             ExampleCommand = new DelegateCommand(ExecuteExample, CanExecuteExample);
             IsFlowDirectionInverted = null;
+            IsOnlyCreatedCircuitVisible = true;
+            IsHorizontalFlowActive = false;
+            IsHorizontalFlowBrushBlue = true;
         }
 
         #region Ok command
@@ -52,7 +55,14 @@ namespace CustomControlTestShow
             get { return _isImageOverlaidWithCreatedCircuit; }
             set { SetField(ref _isImageOverlaidWithCreatedCircuit, value); }
         }
-        
+
+        private bool _isHorizontalFlowActive;
+        public bool IsHorizontalFlowActive
+        {
+            get { return _isHorizontalFlowActive; }
+            set { SetField(ref _isHorizontalFlowActive, value); }
+        }
+
         private bool? _isFlowDirectionInverted;
         public bool? IsFlowDirectionInverted
         {
@@ -60,6 +70,13 @@ namespace CustomControlTestShow
             set { SetField(ref _isFlowDirectionInverted, value); }
         }
 
+
+        private bool _isHorizontalFlowBrushBlue;
+        public bool IsHorizontalFlowBrushBlue
+        {
+            get { return _isHorizontalFlowBrushBlue; }
+            set { SetField(ref _isHorizontalFlowBrushBlue, value); }
+        }
         #endregion
 
     }

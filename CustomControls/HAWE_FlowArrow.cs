@@ -50,5 +50,43 @@ namespace CustomControls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HAWE_FlowArrow), new FrameworkPropertyMetadata(typeof(HAWE_FlowArrow)));
         }
+
+        #region ArrowBrushOne
+
+        /// <summary>
+        /// FlowColor
+        /// </summary>
+        public Brush ArrowBrushOne
+        {
+            get { return (Brush)GetValue(ArrowBrushOneProperty); }
+            set { SetValue(ArrowBrushOneProperty, value); }
+        }
+
+        /// <summary>
+        /// FlowColorProperty
+        /// </summary>
+        public static readonly DependencyProperty ArrowBrushOneProperty =
+            DependencyProperty.Register("ArrowBrushOne", typeof(Brush), typeof(HAWE_FlowArrow), new FrameworkPropertyMetadata(Brushes.Black));
+
+        #endregion
+
+        #region Flow Color
+
+        /// <summary>
+        /// ArrowBrushTwo
+        /// </summary>
+        public Brush ArrowBrushTwo
+        {
+            get { return (Brush)GetValue(ArrowBrushTwoProperty); }
+            set { SetValue(ArrowBrushTwoProperty, value); }
+        }
+
+        /// <summary>
+        /// FlowColorProperty
+        /// </summary>
+        public static readonly DependencyProperty ArrowBrushTwoProperty =
+            DependencyProperty.Register("ArrowBrushTwo", typeof(Brush), typeof(HAWE_FlowArrow), new FrameworkPropertyMetadata(Brushes.Gray));
+
+        #endregion
     }
 }

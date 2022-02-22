@@ -11,6 +11,8 @@
     <Style TargetType="{x:Type local:HAWE_FlowArrow}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="Transparent"/>
+        <Setter Property="ArrowBrushOne" Value="Blue"/>
+        <Setter Property="ArrowBrushTwo" Value="Aquamarine"/>
         <Setter Property="Height" Value="14"/>
         <Setter Property="Width" Value="21"/>
         <Setter Property="Template">
@@ -28,12 +30,12 @@
                                 <Canvas.Resources/>
 
                                 <Canvas x:Name="InnerCanvas">
-                                    <Path x:Name="Path01" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="DarkRed" StrokeThickness="0.261463">
+                                    <Path x:Name="Path01" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="{TemplateBinding ArrowBrushOne}" StrokeThickness="0.261463">
                                         <Path.Data>
                                             <PathGeometry Figures="M 0 0 6.9984685 6.9775642 0 13.954618 0.04551814 14 H 6.9529504 L 10.497188 10.465837 13.996424 6.9775642 10.497188 3.4887816 6.9979553 0 Z" FillRule="NonZero"/>
                                         </Path.Data>
                                     </Path>
-                                    <Path x:Name="Path02" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="Red" StrokeThickness="0.261463">
+                                    <Path x:Name="Path02" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="{TemplateBinding ArrowBrushTwo}" StrokeThickness="0.261463">
                                         <Path.Data>
                                             <PathGeometry Figures="m 7.0061382 0.00102028 -0.00205 0.00207213 6.9979548 6.97756419 -6.9979548 6.9770544 0.016366 0.01632 h 6.9652238 l 3.5156 -3.505099 L 21 6.9806606 17.501278 3.491878 13.999486 0.00105679 Z" FillRule="NonZero"/>
                                         </Path.Data>
@@ -52,10 +54,10 @@
     
     <!--HAWE_CircuitHorizontalLine-->
     <Style TargetType="{x:Type local:HAWE_CircuitHorizontalLine}">
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Background" Value="White"/>
         <Setter Property="Foreground" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Black"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <!--<Setter Property="FlowColor" Value="SteelBlue"/>-->
         <!--<Setter Property="IsFlowLeftToRight" Value="{x:Null}"/>-->
         <Setter Property="Height" Value="6"/>
@@ -376,6 +378,80 @@
                         <Trigger Property="SwitchFlowDirection" Value="False">
                             <Setter TargetName="Button" Property="Background" Value="DarkRed"/>
                         </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--HAWE_TogglePumpSmall-->
+    <!--Needed Info: Width = 120
+                     Height = 160
+                     Translate X = 0
+                     Translate Y = 0-->
+    <Style TargetType="{x:Type local:HAWE_TogglePumpSmall}">
+        <Setter Property="Height" Value="182"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="10"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:HAWE_TogglePumpSmall}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+
+                        <Grid x:Name="MainGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Button x:Name="Button"  Grid.Row="0" Grid.RowSpan="2" Background="Transparent" BorderBrush="Transparent" Command="{x:Static local:HAWE_TogglePumpSmall.ChangeFlowDirectionCommand}"/>
+
+                            <Label Grid.Row="0" Content="{TemplateBinding Label}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center"/>
+
+                            <Viewbox x:Name="Viewbox" Grid.Row="1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                                <UserControl x:Name="UC_Icon">
+
+                                    <Canvas x:Name="OuterCanvas" Width="120" Height="160">
+                                        <Canvas.RenderTransform>
+                                            <TransformGroup>
+                                                <TranslateTransform X="0" Y="0" />
+                                                <RotateTransform Angle="0" CenterX="90" CenterY="30"/>
+                                            </TransformGroup>
+                                        </Canvas.RenderTransform>
+                                        <Canvas.Resources/>
+
+                                        <Canvas x:Name="InnerCanvas">
+
+                                            <Path x:Name="Path" Fill="{Binding ElementName=UC_Icon, Path=Foreground}" StrokeThickness="3.22503" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                                                <Path.Data>
+                                                    <PathGeometry Figures="M 60.001884 4.6116773e-4 A 59.997954 58.100542 0 0 0 0 58.101521 59.997954 58.100542 0 0 0 59.482432 116.19479 v 7.68652 l -10.057281 4.18628 1.761455 3.90562 12.865647 4.98142 0.0083 -0.015 0.06285 0.0242 -8.709566 3.625 0.01575 0.0317 -5.260014 2.19055 1.761453 3.90562 7.10252 2.74408 v 10.53978 h 4.431907 v -8.82469 l 0.03135 0.008 v -4.58385 l -5.836251 -2.26073 7.005131 -2.91558 -0.01575 -0.0392 5.251891 -2.18279 1.655898 -3.94461 -12.857637 -4.97363 v 0.008 l -1.793811 -0.69379 7.013142 -2.91558 V 116.07172 A 59.997954 58.100542 0 0 0 120 58.103105 59.997954 58.100542 0 0 0 60.006282 0.00204515 Z M 59.230639 4.2646874 a 55.508307 53.834412 0 0 1 0.0083 0 55.508307 53.834412 0 0 1 0.55134 0 A 55.508307 53.834412 0 0 1 115.30342 58.101521 55.508307 53.834412 0 0 1 59.790303 111.93055 55.508307 53.834412 0 0 1 4.2851982 58.101521 55.508307 53.834412 0 0 1 59.230168 4.2646874 Z" FillRule="NonZero"/>
+                                                </Path.Data>
+                                            </Path>
+
+                                        </Canvas>
+                                    </Canvas>
+
+                                </UserControl>
+                            </Viewbox>
+
+                        </Grid>
+
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!--<Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Button" Property="Background" Value="SteelBlue"/>
+                            <Setter TargetName="MainGrid" Property="Background" Value="SteelBlue"/>
+                        </Trigger>
+                        <Trigger Property="IsFlowActive" Value="True">
+                            <Setter TargetName="Button" Property="Background" Value="DarkGreen"/>
+                        </Trigger>
+                        <Trigger Property="IsFlowActive" Value="False">
+                            <Setter TargetName="Button" Property="Background" Value="DarkRed"/>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

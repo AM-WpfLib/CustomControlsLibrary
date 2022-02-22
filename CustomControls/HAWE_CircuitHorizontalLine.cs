@@ -70,7 +70,10 @@ namespace CustomControls
 
         private void SetControls()
         {
-            SetFlowArrows();
+            if (IsFlowActive)
+                SetWithFlowArrows();
+            else
+                SetWithoutFlowArrows();
         }
 
         #endregion
@@ -109,10 +112,12 @@ namespace CustomControls
             }
         }
 
-        private void SetFlowArrows()
+        private void SetWithFlowArrows()
         {
             if (MainCanvas == null)
                 return;
+
+            MainCanvas.Children.Clear();
 
             double canvasWidth = MainCanvas.Width;
             double canvasHeight = MainCanvas.Height;
@@ -138,6 +143,16 @@ namespace CustomControls
                 hAWE_FlowArrow.Name = $"HAWE_FlowArrow_{currentArrowCount}";
                 hAWE_FlowArrow.Height = correctedArrowHeight;
                 hAWE_FlowArrow.Width = correctedArrowWidth;
+                if(IsFlowBrushBlue)
+                {
+                    hAWE_FlowArrow.ArrowBrushOne = Brushes.DarkBlue;
+                    hAWE_FlowArrow.ArrowBrushTwo = Brushes.Aquamarine;
+                }
+                else
+                {
+                    hAWE_FlowArrow.ArrowBrushOne = Brushes.DarkRed;
+                    hAWE_FlowArrow.ArrowBrushTwo = Brushes.Red;
+                }
                 Canvas.SetTop(hAWE_FlowArrow, 0);
                 Canvas.SetLeft(hAWE_FlowArrow, (correctedArrowWidth * currentArrowCount));
                 MainCanvas.Children.Add(hAWE_FlowArrow);
@@ -179,7 +194,7 @@ namespace CustomControls
             leftBorder.Width = correctedArrowWidth;
             leftBorder.Background = Brushes.Gray;
             leftBorder.BorderBrush = Brushes.Black;
-            leftBorder.BorderThickness = new Thickness(1,1,0,1);
+            leftBorder.BorderThickness = new Thickness(1, 1, 0, 1);
             Canvas.SetTop(leftBorder, 0);
             Canvas.SetLeft(leftBorder, 0);
             MainCanvas.Children.Add(leftBorder);
@@ -196,6 +211,25 @@ namespace CustomControls
 
 
             storyBoard.Begin(this);
+            MainCanvas.Background = Brushes.White;
+        }
+
+        private void SetWithoutFlowArrows()
+        {
+            if (MainCanvas == null)
+                return;
+
+            double canvasWidth = MainCanvas.Width;
+            double canvasHeight = MainCanvas.Height;
+
+            if (canvasWidth <= 0 || canvasHeight <= 0)
+                return;
+
+            if (!IsValidDoubleValue(canvasWidth) || !IsValidDoubleValue(canvasHeight))
+                return;
+
+            MainCanvas.Children.Clear();
+            MainCanvas.Background = Brushes.Black;
         }
 
         #endregion
@@ -205,7 +239,7 @@ namespace CustomControls
         #region Flow Color
 
         /// <summary>
-        /// Label
+        /// FlowColor
         /// </summary>
         public Brush FlowColor
         {
@@ -214,7 +248,7 @@ namespace CustomControls
         }
 
         /// <summary>
-        /// LabelProperty
+        /// FlowColorProperty
         /// </summary>
         public static readonly DependencyProperty FlowColorProperty =
             DependencyProperty.Register("FlowColor", typeof(Brush), typeof(HAWE_CircuitHorizontalLine), new FrameworkPropertyMetadata(Brushes.SteelBlue));
@@ -224,19 +258,60 @@ namespace CustomControls
         #region IsFlowLeftToRight
 
         /// <summary>
-        /// IsFlowLeftToRight
+        /// IsFlowBrushBlue
         /// </summary>
-        public bool? IsFlowLeftToRight
+        public bool IsFlowBrushBlue
         {
-            get { return (bool?)GetValue(IsFlowLeftToRightProperty); }
-            set { SetValue(IsFlowLeftToRightProperty, value); }
+            get { return (bool)GetValue(IsFlowBrushBlueProperty); }
+            set { SetValue(IsFlowBrushBlueProperty, value); }
         }
 
         /// <summary>
-        /// IsFlowLeftToRightProperty
+        /// IsFlowBrushBlueProperty
         /// </summary>
-        public static readonly DependencyProperty IsFlowLeftToRightProperty =
-            DependencyProperty.Register("IsFlowLeftToRight", typeof(bool?), typeof(HAWE_CircuitHorizontalLine), new FrameworkPropertyMetadata(null));
+        public static readonly DependencyProperty IsFlowBrushBlueProperty =
+            DependencyProperty.Register("IsFlowBrushBlue", typeof(bool), typeof(HAWE_CircuitHorizontalLine), new FrameworkPropertyMetadata(true, IsFlowBrushBluePropertyChanged));
+
+        /// <summary>
+        /// IsFlowBrushBlue changed
+        /// </summary>
+        /// <param name="source">HAWE_Freigabe</param>
+        /// <param name="e">DependencyPropertyChangedEventArgs</param>
+        protected static void IsFlowBrushBluePropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
+            HAWE_CircuitHorizontalLine myself = source as HAWE_CircuitHorizontalLine;
+            myself.OnApplyTemplate();
+        }
+
+        #endregion
+
+        #region IsFlowActive
+
+        /// <summary>
+        /// IsFlowActive
+        /// </summary>
+        public bool IsFlowActive
+        {
+            get { return (bool)GetValue(IsFlowActiveProperty); }
+            set { SetValue(IsFlowActiveProperty, value); }
+        }
+
+        /// <summary>
+        /// IsFlowActiveProperty
+        /// </summary>
+        public static readonly DependencyProperty IsFlowActiveProperty =
+            DependencyProperty.Register("IsFlowActive", typeof(bool), typeof(HAWE_CircuitHorizontalLine), new FrameworkPropertyMetadata(false, OnIsFlowActivePropertyChanged));
+
+        /// <summary>
+        /// IsFlowActive changed
+        /// </summary>
+        /// <param name="source">HAWE_Freigabe</param>
+        /// <param name="e">DependencyPropertyChangedEventArgs</param>
+        protected static void OnIsFlowActivePropertyChanged(DependencyObject source, DependencyPropertyChangedEventArgs e)
+        {
+            HAWE_CircuitHorizontalLine myself = source as HAWE_CircuitHorizontalLine;
+            myself.OnApplyTemplate();
+        }
 
         #endregion
 
